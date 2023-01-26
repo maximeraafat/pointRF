@@ -15,7 +15,7 @@ parser.add_argument('--datapath', metavar='PATH', default=None, type=str, help='
 parser.add_argument('--train', action='store_true', help='whether to train the point model')
 parser.add_argument('--test', action='store_true', help='whether to create testing images and evaluate psnr against the ground truth')
 parser.add_argument('--testgif', action='store_true', help='whether to create a gif from the testing images')
-parser.add_argument('--testouput', metavar='PATH', default=None, type=str, help='path to the directory in which the testing images will be stored')
+parser.add_argument('--testoutput', metavar='PATH', default=None, type=str, help='path to the directory in which the testing images will be stored')
 parser.add_argument('--testmdodel', metavar='PATH', default=None, type=str, help='path to a .pth model checkpoint file to be used for testing')
 
 # saving options
@@ -89,9 +89,10 @@ def main():
         testCam = transforms_cam(testpath)
         testImg = transforms_img(testpath, alpha=False, background=background)
 
-        testouput = os.path.join( os.path.dirname(os.path.abspath(__file__)), 'test') if args.testouput is None else args.testouput
-        testouput = os.path.join(testouput, dataname)
+        testoutput = os.path.join( os.path.dirname(os.path.abspath(__file__)), 'test') if args.testoutput is None else args.testoutput
+        testoutput = os.path.join(testoutput, dataname)
 
+        print('test data will be saved under %s' % testoutput)
         if args.testmdodel:
             model = torch.load(args.testmdodel, map_location=device) # load provided test model
         else:
@@ -99,7 +100,7 @@ def main():
             if len(modelpaths) == 0: raise Warning('no model checkpoint found in %s' % savepath)
             model = torch.load(max(modelpaths, key=os.path.getctime), map_location=device) # load last saved model
 
-        output = testrenders(model, testCam, image_size=testImg.shape[-2], background=background, savepath=testouput, savegif=args.testgif)
+        output = testrenders(model, testCam, image_size=testImg.shape[-2], background=background, savepath=testoutput, savegif=args.testgif)
         print('test psnr = %f' % psnr(testImg, output))
 
     return

@@ -40,7 +40,7 @@ def pointoptim(xyz, rgb, cameras, images, image_size, epochs, val_freq, radius, 
     images = images.permute(0, 2, 3, 1) # shape back to (b, w, h, c)
 
     # initialize renderer
-    background += (images.shape[-1] == 4) * [0]
+    background = background + (images.shape[-1] == 4) * [0]
     renderer = point_renderer(cameras[0], image_size, radius=radius, background=background)
     if validation: vrenderer = point_renderer(cameras[0], default_size, radius=radius, background=background)
 
