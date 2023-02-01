@@ -4,8 +4,16 @@ This repository provides a simple **differentiable point-based radiance fields**
 
 **pointRF** is a simple and naive coarse-to-fine optimization pipeline, extending on [recent differentiable point surface-splatting](https://arxiv.org/abs/1912.08804) techniques. Point locations and colors are incrementally learned via propagation of gradients from target images back to the 3D scene. While the procuded imagery does not achieve state-of-the-art quality, novel views are rendered at interactive speeds and the learned point clouds can directly be saved as **ply** files.
 
-TEST VIEW RENDERS RGB + RADIANCE + BLENDER
----
+<p align='center'>
+  <img src='images/chairRGB.gif'/>
+  <img src='images/hotdogRGB.gif'/>
+  <img src='images/legoRGB.gif'/>
+  <img src='images/ficusMLP.gif'/>
+  <br>
+  <b>
+  Char, hotdog and lego scenes (diffuse RGB points) and ficus scene (view-dependent points)
+  </b>
+</p>
 
 Point colors can either be learned as static diffuse values or as view-dependent properties. In the latter case, view dependencies are fitted via optimisation of deep features fed to a simple MultiLayer Perceptron (MLP). Note that the MLP is not capable of fully overfitting to the target images and suffers from undesired view artefacts, as visibile in the above renders. Future releases of this code might mititgate this limitation by incorporating spherical harmonics, following the idea proposed by [Zhang et al.](https://arxiv.org/abs/2205.14330)
 
@@ -74,7 +82,7 @@ Note that the `--test` option does not require any training parameters, since th
 * `--initlr` : initial learning rate (by default set to `1e-2`) ; the optimiser will progressively decrease it when making no further progress
 * `--radius` : initial point radius (by default set to `0.1`) ; the model will progressively decrease the radius
 * `--finalradius` : final point radius (by default set to `None`) ; the last epochs will train with this radius
-* `--radiance` : whether to learn view dependent colors for each point instead of static RGB point colors
+* `--radiance` : whether to learn view-dependent colors for each point instead of static RGB point colors
 
 We suggest using a small `--imagesize` (for instance `256`), since larger resolutions will significantly slow down rendering, and therefore training. No matter what, the model will automatically fall back to the full image resolution once it converged at the set `--imagesize`.
 
@@ -86,6 +94,13 @@ In addition to this code, we provide a dataset consisting of the specular reflec
 
 [DOWNLOAD LEGO SPECULAR DATASET](https://drive.google.com/file/d/1xflxoBpqGU05A2gvyPjwM-tO8VORbpIb/view?usp=share_link)
 
-
-SHOW SAMPLE LEGO SPECULAR
----
+<p align='center'>
+  <img src='images/legoSpecular1.jpg'/>
+  <img src='images/legoSpecular2.jpg'/>
+  <img src='images/legoSpecular3.jpg'/>
+  <img src='images/legoSpecular.gif'/>
+  <br>
+  <b>
+  3 random views form the LEGO specular training data, and our test views reconstruction
+  </b>
+</p>
