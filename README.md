@@ -67,18 +67,20 @@ Note that the `--test` option does not require any training parameters, since th
 ---
 * `--epochs` : number of training epochs (by default set to `30000`)
 * `--valfreq` : validation frequency during training (by default set to `1000`, if applicable)
-* `--savefreq` : save frequency of the model checkpoint, and **ply** files if applicable, during training (by default set to `1000`)
-* `--background` : background color provided as a list of 3 float values inside a string (by default set to black with `'[0, 0, 0]'`)
+* `--savefreq` : save frequency of the model checkpoint, and **ply** files if applicable (by default set to `1000`)
+* `--background` : background color as a list of 3 float values inside a string (by default set to black)
 * `--imagesize` : dimensions of the resized images during training (by default the images are unchanged)
 * `--npoints` : initial number of points (by default set to `100`) ; the model will progressively add points until reaching the million points
 * `--initlr` : initial learning rate (by default set to `1e-2`) ; the optimiser will progressively decrease it when making no further progress
-* `--radius` : initial point radius (by default set to `0.1`) ; the model will progressively decrease the radius by half
-* `--finalradius` : final point radius (by default set to `None`) ; if called, the last epochs will train with this radius
+* `--radius` : initial point radius (by default set to `0.1`) ; the model will progressively decrease the radius
+* `--finalradius` : final point radius (by default set to `None`) ; the last epochs will train with this radius
 * `--radiance` : whether to learn view dependent colors for each point instead of static RGB point colors
 
 We suggest using a small `--imagesize` (for instance `256`), since larger resolutions will significantly slow down rendering, and therefore training. No matter what, the model will automatically fall back to the full image resolution once it converged at the set `--imagesize`.
-  
+
 </details>
+
+Notice that the python script loading the nerf camera poses (`loadnerf.py`) has only been tested with scenes extracted from Blender, and might need to be adapted to be functional with real world data.
 
 In addition to this code, we provide a dataset consisting of the specular reflections passes of the LEGO scene obtained from the original [synthetic NeRF](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1) dataset. The dataset was created using [BlenderNeRF](https://github.com/maximeraafat/BlenderNeRF).
 
