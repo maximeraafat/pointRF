@@ -101,6 +101,6 @@ In addition to this code, we provide a dataset consisting of the specular reflec
   <img src='images/legoSpecular.gif'/>
   <br>
   <b>
-  3 random views form the LEGO specular training data, and our test views reconstruction
+  3 random views form the LEGO specular training data, and our test views
   </b>
 </p>
