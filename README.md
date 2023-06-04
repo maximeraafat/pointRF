@@ -15,7 +15,7 @@ This repository provides a simple **differentiable point-based radiance fields**
   </b>
 </p>
 
-Point colors can either be learned as static diffuse values or as view-dependent properties. In the latter case, view dependencies are fitted via optimisation of deep features fed to a simple MultiLayer Perceptron (MLP). Note that the MLP is not capable of fully overfitting to the target images and suffers from undesired view artefacts, as visibile in the above renders. Future releases of this code might mititgate this limitation by incorporating spherical harmonics, following the idea proposed by [Zhang et al.](https://arxiv.org/abs/2205.14330)
+Point colors can either be learned as static diffuse values or as view-dependent properties. In the latter case, view dependencies are fitted via optimisation of deep features fed to a simple MultiLayer Perceptron (MLP). Note that the MLP is not capable of fully overfitting to the target images and suffers from undesired view artefacts, as visibile in the above renders. Future releases of this code might mitigate this limitation by incorporating spherical harmonics, following the idea proposed by [Zhang et al.](https://arxiv.org/abs/2205.14330)
 
 
 ## Installations
